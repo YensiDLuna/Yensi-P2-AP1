@@ -10,40 +10,31 @@
 
         <Grid Margin="0,10,0,0"  >
             <StackPanel Orientation="Vertical" Margin="10,-10,155,10">
-                
-                <StackPanel Orientation="Vertical">
-                    <Label Content="ProyectoID:" />
+       
+                    <Label Content="Proyecto ID:" FontSize="13" Height="30" Width="80" Margin="-330, 20, 0, 0"/>
+               
+                  
+                        <TextBox x:Name="ProyectoIdTextBox" Text="{Binding ProyectoId}" Height="25" Width="75" Margin="-135, -25, 0, 0"/>
+                <Button x:Name="BuscarButton" Height="25" Width="75" Margin="220, -25, 0, 0" Click="BuscarButton_Click">
+                    <DockPanel>
+                        <TextBlock Margin="-5, 0, 0, 0"> Buscar</TextBlock>
+                        <Image Source = "/Imagenes/search_icon.png" Height="20" Margin="5,0,0,0"/>
+                    </DockPanel>
+                </Button>
 
-                    <StackPanel Orientation="Horizontal" >
-                        <TextBox x:Name="ProyectoIdTextBox" Text="{Binding ProyectoId}" Width="100"  Height="18" />
-                        <Button x:Name="BuscarButton" Margin="5,0" Click="BuscarButton_Clic" >
-                            <StackPanel Orientation="Horizontal">
-                                <Image Source="/Resource/Buscar.png"  />
-                                <Label Content="Buscar" />
-                            </StackPanel>
+                <Label Content="Fecha:" FontSize="13" Height="30" Width="70" Margin="-340, 15, 0, 0"/>
+                <DatePicker x:Name="FechaDatePicker" Text="{Binding Fecha}" Height="25" Width="160" Margin="-50, -25, 0, 0"/>
 
-                        </Button>
-                    </StackPanel>
-                </StackPanel>
-
-                <StackPanel Orientation="Vertical">
-                    <Label Content="Fecha:"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <TextBox  x:Name="FechaTextBox" Text="{Binding a}" Width="100"  Height="18"/>
-                </StackPanel>
+                <Label Content="Descripcion:" FontSize="13" Height="30" Width="80" Margin="-330, 20, 0, 0"/>
 
 
+                <TextBox x:Name="DescripcionTextBox" Text="{Binding Descripcion}" Height="30" Width="170" Margin="-55, -28, 0, 0"/>
 
-                <StackPanel Orientation="Vertical">
-                <Label Content="Descripcion:"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <TextBox  x:Name="DescripcionTextBox" Text="{Binding a}" Width="100"  Height="18"/>
-            </StackPanel>
+
 
                 <StackPanel >
-                    <DataGrid x:Name="DetallesDataGrid" ItemsSource="{Binding Detalle}" AutoGenerateColumns="False" Height="300" Width="550" IsReadOnly="True" HorizontalAlignment="Center">
+                    
+                    <DataGrid x:Name="DetallesDataGrid" ItemsSource="{Binding Detalle}" AutoGenerateColumns="False" Height="300" Width="550" IsReadOnly="True" >
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="TipoID" Binding="{Binding Id}" Width="*"/>
                     <DataGridTextColumn Header="Tipo Tarea" Binding="{Binding }" Width="*"/>
