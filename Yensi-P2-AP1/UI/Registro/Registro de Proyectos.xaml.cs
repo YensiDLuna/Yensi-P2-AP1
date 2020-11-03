@@ -20,32 +20,27 @@ namespace Yensi_P2_AP1.UI.Registro
     /// </summary>
     public partial class Registro_de_Proyectos : Window
     {
-        int Tiempo;
+ 
         Proyecto proyecto;
         public Registro_de_Proyectos()
         {
             InitializeComponent();
             proyecto = new Proyecto();
           DataContext = proyecto;
+            TipoIdComboBox.ItemsSource = TipoBLL.GetList();
+            TipoIdComboBox.SelectedValuePath = "TipoID";
+            TipoIdComboBox.DisplayMemberPath = "tipo";
 
-          //  DetallesDataGrid.ItemsSource = new List<ProyectoDetalle>();
+            //  DetallesDataGrid.ItemsSource = new List<ProyectoDetalle>();
         }
         public bool Existe()
         {
-            var orden = ProyectoBLL.Buscar(Convert.ToInt32(ProyectoIdTextBox.Text));
+            var proyecto = ProyectoBLL.Buscar(Convert.ToInt32(ProyectoIdTextBox.Text));
 
             return proyecto != null;
         }
 
-        private void Actualizar()
-        {
-            this.DataContext = null;
-           
-            
-            FechaDatePicker.SelectedDate = proyecto.Fecha.Date;
-             DetallesDataGrid.ItemsSource = proyecto.ProyectoDetalles;
-        }
-
+       
 
         private void Limpiar()
         {
@@ -53,7 +48,7 @@ namespace Yensi_P2_AP1.UI.Registro
             this.DataContext = this.proyecto;
 
             DetallesDataGrid.ItemsSource = new List<ProyectoDetalle>();
-            Actualizar();
+           
         }
 
         public void GuardarButton_Click(object sender, RoutedEventArgs e)
@@ -93,8 +88,10 @@ namespace Yensi_P2_AP1.UI.Registro
 
             if (anterior != null)
             {
-                proyecto = anterior;
-                Actualizar();
+                this.proyecto = anterior;
+                this.DataContext = null;
+                this.DataContext = proyecto;
+
                 MessageBox.Show("Exito!!");
             }
             else
@@ -104,14 +101,20 @@ namespace Yensi_P2_AP1.UI.Registro
         }
         public void EliminarButton_Click(object sender, RoutedEventArgs e)
         {
-            if (ProyectoBLL.Eliminar(Convert.ToInt32(ProyectoIdTextBox.Text)))
+            Proyecto existe = ProyectoBLL.Buscar(this.proyecto.ProyectoID);
+
+            if (existe == null)
             {
-                MessageBox.Show("Exito.", "Exito", MessageBoxButton.OK, MessageBoxImage.Information);
-                Limpiar();
+                MessageBox.Show("Proyecto no encontrado", "Fallo",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
             else
             {
-                MessageBox.Show(" No se pudo eliminar.", "Fallo", MessageBoxButton.OK, MessageBoxImage.Error);
+                ProyectoBLL.Eliminar(this.proyecto.ProyectoID);
+                MessageBox.Show("Eliminado", "Exito",
+                    MessageBoxButton.OK, MessageBoxImage.Information);
+                Limpiar();
             }
         }
         private void NuevoButton_Click(object sender, RoutedEventArgs e)
@@ -121,21 +124,47 @@ namespace Yensi_P2_AP1.UI.Registro
 
         private void AgregarButton_Click(object sender, RoutedEventArgs e)
         {
-            this.proyecto.ProyectoDetalles.Add(new ProyectoDetalle(proyecto.ProyectoID, Convert.ToInt32(TipoIdComboBox.SelectedValue) + 1, RequerimientoTextBox.Text, Convert.ToInt32(TiempoTextBox.Text)));
-
+            proyecto.Tiempo += Convert.ToInt32(TiempoTextBox.Text);
+            proyecto.ProyectoDetalles.Add(new ProyectoDetalle(Utilidades.ToInt(TipoIdComboBox.SelectedValue.ToString()), proyecto.ProyectoID, RequerimientoTextBox.Text, Convert.ToInt32(TiempoTextBox.Text)));
+            this.DataContext = null;
+            this.DataContext = proyecto;
            
- 
-
-            Actualizar();
 
          
+        }
+        private void TiempoTextBox_TextChanged(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (TiempoTextBox.Text.Any(char.IsLetter))
+                {
+                    TiempoTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+                    MessageBox.Show("En el tiempo solo debe ingresar numeros", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                else
+                {
+                    TiempoTextBox.BorderBrush = new SolidColorBrush(Colors.Yellow);
+                }
+            }
+            catch
+            {
+                TiempoTextBox.Foreground = SystemColors.ControlTextBrush;
+            }
         }
 
         private void RemoverButton_Click(object sender, RoutedEventArgs e)
         {
-            proyecto.ProyectoDetalles.RemoveAt(DetallesDataGrid.FrozenColumnCount);
-          
-            Actualizar();
+
+            if (DetallesDataGrid.Items.Count >= 1 && DetallesDataGrid.SelectedIndex <= DetallesDataGrid.Items.Count - 1)
+            {
+                ProyectoDetalle project = (ProyectoDetalle)DetallesDataGrid.SelectedValue;
+                
+                proyecto.ProyectoDetalles.RemoveAt(DetallesDataGrid.SelectedIndex);
+                this.DataContext = null;
+                this.DataContext = proyecto;
+            }
+
+
         }
 
     }

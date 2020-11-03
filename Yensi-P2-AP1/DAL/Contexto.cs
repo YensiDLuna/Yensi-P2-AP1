@@ -16,6 +16,13 @@ namespace Yensi_P2_AP1.DAL
         {
             optionsBuilder.UseSqlite(@"Data Source = Data\ProyectoControl.db");
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Tipo>().HasData(new Tipo() { TipoID = 2, tipo = "APrender Css" });
+            modelBuilder.Entity<Tipo>().HasData(new Tipo() { TipoID = 3, tipo = "APrender JS" });
+            modelBuilder.Entity<Tipo>().HasData(new Tipo() { TipoID = 4, tipo = "APrender C#" });
+        }
 
 
     }

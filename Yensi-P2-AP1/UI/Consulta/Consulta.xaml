@@ -7,6 +7,40 @@
         mc:Ignorable="d"
         Title="Consulta" Height="450" Width="800">
     <Grid>
-        
+        <StackPanel Orientation="Vertical" Margin="10,5,10,0">
+            <StackPanel Orientation="Horizontal" Height="58">
+                <StackPanel Margin="5,0" Width="135">
+                    <Label Content="Filtro:"/>
+                    <ComboBox x:Name="FiltroComboBox" Width="127" Height="25">
+                        <ComboBoxItem Content="Tiempo"/>
+                        <ComboBoxItem Content="ProyectoId"/>
+                        <ComboBoxItem Content="Descripcion"/>
+                    </ComboBox>
+                </StackPanel>
+
+                <StackPanel Margin="5,0">
+                    <Label Content="Critero:"/>
+                    <TextBox x:Name="CriterioTextBox" Width="100" Height="25"/>
+                </StackPanel>
+                <Button x:Name="BuscarBoton" Height="30" Width="85" Margin="0,20,0,0" Click="BuscarBoton_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Width="18" Height="18" Source="/Imagenes/Buscar.png"/>
+                        <Label Content="Buscar"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+
+            <StackPanel HorizontalAlignment="Left">
+
+                <DataGrid x:Name="DatosDataGrid" Height="350" Width="527" AutoGenerateColumns="False" IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ProyectoId" Binding="{Binding ProyectoID}"/>
+                        <DataGridTextColumn Header="Fecha" Binding="{Binding Fecha}"/>
+                        <DataGridTextColumn Header="Descripcion" Binding="{Binding Descripcion}"/>
+                        <DataGridTextColumn Header="Tiempo" Binding="{Binding Tiempo}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Window>

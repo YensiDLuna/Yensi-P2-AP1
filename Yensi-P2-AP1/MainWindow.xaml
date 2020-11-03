@@ -23,7 +23,7 @@
 
                 <MenuItem Header="Consultas">
 
-                    <MenuItem x:Name="ConsultaMenuItem" Header="Consulta "/>
+                    <MenuItem x:Name="ConsultaMenuItem" Header="Consulta " Click="ProyectoConsultaMenuItem_Click"/>
 
 
 

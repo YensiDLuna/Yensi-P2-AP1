@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Yensi_P2_AP1.UI.Consulta;
 using Yensi_P2_AP1.UI.Registro;
 
 namespace Yensi_P2_AP1
@@ -33,6 +34,15 @@ namespace Yensi_P2_AP1
             Registro_de_Proyectos rc = new Registro_de_Proyectos();
 
             rc.Show();
+
+        }
+        private void ProyectoConsultaMenuItem_Click(object sender, RoutedEventArgs e)
+
+        {
+
+            Consulta cc = new Consulta();
+
+            cc.Show();
 
         }
     }
