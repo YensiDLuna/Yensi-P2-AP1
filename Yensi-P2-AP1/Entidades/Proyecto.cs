@@ -29,6 +29,7 @@ namespace Yensi_P2_AP1.Entidades
             ProyectoID = 0;
             Fecha = DateTime.Now;
             Descripcion = string.Empty;
+            ProyectoDetalles = new List<ProyectoDetalle>();
         }
     }
 

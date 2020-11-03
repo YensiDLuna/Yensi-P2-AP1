@@ -16,9 +16,9 @@ namespace Yensi_P2_AP1.Entidades
 
         public int Tiempo { get; set; }
 
-        public ProyectoDetalle(int iD, int proyectoID, int tipoID, string requerimiento, int tiempo)
+        public ProyectoDetalle( int proyectoID, int tipoID, string requerimiento, int tiempo)
         {
-            ID = iD;
+            
             ProyectoID = proyectoID;
             TipoID = tipoID;
             Requerimiento = requerimiento;

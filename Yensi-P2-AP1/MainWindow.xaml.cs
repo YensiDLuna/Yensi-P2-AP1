@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Yensi_P2_AP1.UI.Registro;
 
 namespace Yensi_P2_AP1
 {
@@ -23,6 +24,16 @@ namespace Yensi_P2_AP1
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void ProyectoMenuItem_Click(object sender, RoutedEventArgs e)
+
+        {
+
+            Registro_de_Proyectos rc = new Registro_de_Proyectos();
+
+            rc.Show();
+
         }
     }
 }

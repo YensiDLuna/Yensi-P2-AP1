@@ -13,7 +13,7 @@
 
                 <MenuItem Header="Registros">
 
-                    <MenuItem x:Name="MenuItem" Header="Registro " ></MenuItem>
+                    <MenuItem x:Name="MenuItem" Header="Registro " Click="ProyectoMenuItem_Click" ></MenuItem>
 
 
 

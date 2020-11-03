@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using Yensi_P2_AP1.UI.Registro;
 
 namespace Yensi_P2_AP1
 {
@@ -13,5 +14,7 @@ namespace Yensi_P2_AP1
     /// </summary>
     public partial class App : Application
     {
+
+       
     }
 }
